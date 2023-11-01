@@ -1,0 +1,15 @@
+# Example code for feature engineering using Python and pandas
+import pandas as pd
+from sklearn.datasets import fetch_openml
+
+# Load the Titanic dataset
+titanic = fetch_openml(name="titanic", version=1)
+df = pd.DataFrame(data=titanic.data)
+
+# Extract titles from names
+df['Title'] = df['Name'].str.extract(' ([A-Za-z]+)\.', expand=False)
+
+# Encode categorical variables
+df = pd.get_dummies(df, columns=['Sex', 'Embarked', 'Title'])
+
+# Reference: [4] - Titanic Dataset, [2] - pandas
