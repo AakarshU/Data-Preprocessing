@@ -1,0 +1,10 @@
+import pandas as pd
+
+# Loading the data
+data = pd.read_csv('https://archive.ics.uci.edu/ml/machine-learning-databases/iris/iris.data', header=None, names=['sepal_length', 'sepal_width', 'petal_length', 'petal_width', 'class'])
+
+# Replaces missing values with the median
+median = data.median()
+data.fillna(median, inplace=True)
+
+print(data.head())
