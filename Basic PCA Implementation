@@ -1,0 +1,14 @@
+from sklearn.decomposition import PCA
+import numpy as np
+
+# Sample data
+data = np.array([[1, 2, 3], [4, 5, 6], [7, 8, 9]])
+
+# Create a PCA instance with 2 components
+pca = PCA(n_components=2)
+
+# Fit and transform the data
+reduced_data = pca.fit_transform(data)
+
+print("Original data:\n", data)
+print("Reduced data:\n", reduced_data)
