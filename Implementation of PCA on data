@@ -1,0 +1,45 @@
+#Implementation of PCA on different data types 
+# Importing the necessary libraries
+from sklearn.decomposition import PCA
+from sklearn.preprocessing import StandardScaler
+import numpy as np
+
+# Defining a function to apply PCA on the dataset
+def perform_pca(data, n_components=2):
+    # Standardize the data
+    data_standardized = StandardScaler().fit_transform(data)
+    # Initialize PCA
+    pca_model = PCA(n_components=n_components)
+    # Fit PCA on the data
+    pca_model.fit(data_standardized)
+    # Return the explained variance ratio of the components
+    return pca_model.explained_variance_ratio_
+
+# Various types of data chosen
+# Continuous data for PCA
+continuous_data = np.random.rand(100, 5)
+# Binary data simulating categorical variables
+binary_data = np.random.randint(0, 2, (100, 5))
+# Simulated text data using a random non-negative matrix
+text_data_simulated = np.abs(np.random.randn(100, 5))
+# Simulated image data using normalized pixel values
+image_data_simulated = np.random.rand(100, 25)  # 5x5 image
+# Mixed data combining continuous and binary
+mixed_data_simulated = np.concatenate((continuous_data, binary_data), axis=1)
+
+# Applying PCA to each dataset
+pca_results = {
+    "Continuous Data": perform_pca(continuous_data),
+    "Binary Data": perform_pca(binary_data),
+    "Text Data": perform_pca(text_data_simulated),
+    "Image Data": perform_pca(image_data_simulated),
+    "Mixed Data": perform_pca(mixed_data_simulated)
+}
+
+pca_results
+#results are obtained as follows:
+{'Continuous Data': array([0.29175292, 0.2198221 ]),
+ 'Binary Data': array([0.24677178, 0.23015738]),
+ 'Text Data': array([0.24805112, 0.2255515 ]),
+ 'Image Data': array([0.08453614, 0.07567159]),
+ 'Mixed Data': array([0.16748449, 0.12972282])}
